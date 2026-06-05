@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mint': {
+                            50: '#f0fdf6',
+                            100: '#dcfce9',
+                            200: '#bbf7d6',
+                            300: '#86efb8',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    },
+                    fontFamily: {
+                        'tajawal': ['Tajawal', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-tajawal">
+    <!-- Header -->
+    <header id="header" class="bg-white shadow-sm py-3 px-4 md:px-8">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="w-12 ml-4">
+                    <img src="https://i.postimg.cc/15B2BWyF/Chat-GPT-Image-Aug-5-2025-06-14-20-PM.png" alt="شعار مزيد" class="w-full">
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <span class="text-mint-600 font-bold border-b-2 border-mint-500 pb-1 cursor-pointer">الفرص</span>
+                    <span class="text-gray-600 hover:text-mint-600 transition-colors cursor-pointer">المشاريع</span>
+                    <span class="text-gray-600 hover:text-mint-600 transition-colors cursor-pointer">المتطوعون</span>
+                    <span class="text-gray-600 hover:text-mint-600 transition-colors cursor-pointer">من نحن</span>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="md:hidden text-gray-600">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <div class="hidden md:flex items-center space-x-4">
+                    <span class="text-gray-600 hover:text-mint-600 transition-colors cursor-pointer">
+                        <i class="fa-regular fa-bell text-xl"></i>
+                    </span>
+                    <span class="text-gray-600 hover:text-mint-600 transition-colors cursor-pointer">
+                        <i class="fa-regular fa-envelope text-xl"></i>
+                    </span>
+                    <div class="relative ml-2">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="الصورة الشخصية" class="w-10 h-10 rounded-full object-cover border-2 border-mint-300">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="container mx-auto py-8 px-4 md:px-8">
+        <!-- Page Title -->
+        <div id="page-title" class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">استكشف الفرص</h1>
+            <p class="text-gray-600">ابحث عن فرص التطوع المناسبة لمهاراتك واهتماماتك</p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div id="filter-bar" class="bg-white rounded-xl shadow-sm p-4 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Search Field -->
+                <div id="search-field" class="relative">
+                    <label for="role-search" class="block text-sm font-bold text-gray-700 mb-2">عنوان الدور</label>
+                    <div class="relative">
+                        <input type="text" id="role-search" placeholder="ابحث عن عنوان الدور..." class="w-full py-3 px-4 pr-10 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-mint-500 focus:border-transparent">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Skills Dropdown -->
+                <div id="skills-filter">
+                    <label for="skills-select" class="block text-sm font-bold text-gray-700 mb-2">المهارات</label>
+                    <div class="relative">
+                        <select id="skills-select" class="w-full py-3 px-4 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-mint-500 focus:border-transparent">
+                            <option value="" selected>جميع المهارات</option>
+                            <option value="design">تصميم</option>
+                            <option value="programming">برمجة</option>
+                            <option value="marketing">تسويق</option>
+                            <option value="content">كتابة محتوى</option>
+                            <option value="translation">ترجمة</option>
+                            <option value="management">إدارة</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Field Dropdown -->
+                <div id="field-filter">
+                    <label for="field-select" class="block text-sm font-bold text-gray-700 mb-2">المجال</label>
+                    <div class="relative">
+                        <select id="field-select" class="w-full py-3 px-4 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-mint-500 focus:border-transparent">
+                            <option value="" selected>جميع المجالات</option>
+                            <option value="education">تعليم</option>
+                            <option value="health">صحة</option>
+                            <option value="environment">بيئة</option>
+                            <option value="technology">تكنولوجيا</option>
+                            <option value="culture">ثقافة وفنون</option>
+                            <option value="community">تنمية مجتمعية</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Opportunities Grid -->
+        <div id="opportunities-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Opportunity Card 1 -->
+            <div id="opportunity-card-1" class="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">مصمم واجهات مستخدم</h3>
+                        <span class="bg-mint-100 text-mint-700 text-xs font-bold px-2 py-1 rounded-full">عن بعد</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-2">مشروع: منصة تعليمية للأطفال</p>
+                    <p class="text-gray-600 mb-4 line-clamp-3">نبحث عن مصمم واجهات مستخدم للمساعدة في تصميم منصة تعليمية تفاعلية للأطفال تهدف إلى تعزيز مهارات التفكير الإبداعي.</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Figma</span>
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">UI/UX</span>
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">تصميم تفاعلي</span>
+                    </div>
+                    
+                    <button class="w-full bg-mint-500 hover:bg-mint-600 text-white py-2 px-4 rounded-lg transition-colors font-bold">
+                        عرض التفاصيل
+                    </button>
+                </div>
+            </div>
+
+            <!-- Opportunity Card 2 -->
+            <div id="opportunity-card-2" class="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">مطور ويب</h3>
+                        <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full">حضوري</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-2">مشروع: موقع جمعية خيرية</p>
+                    <p class="text-gray-600 mb-4 line-clamp-3">نحتاج إلى مطور ويب للمساعدة في بناء موقع إلكتروني متكامل لجمعية خيرية محلية تعمل في مجال رعاية الأيتام وتقديم المساعدات للعائلات المحتاجة.</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">React</span>
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">JavaScript</span>
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">HTML/CSS</span>
+                    </div>
+                    
+                    <button class="w-full bg-mint-500 hover:bg-mint-600 text-white py-2 px-4 rounded-lg transition-colors font-bold">
+                        عرض التفاصيل
+                    </button>
+                </div>
+            </div>
+
+            <!-- Opportunity Card 3 -->
+            <div id="opportunity-card-3" class="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">كاتب محتوى</h3>
+                        <span class="bg-mint-100 text-mint-700 text-xs font-bold px-2 py-1 rounded-full">عن بعد</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-2">مشروع: مدونة توعوية صحية</p>
+                    <p class="text-gray-600 mb-4 line-clamp-3">مطلوب كاتب محتوى للمساعدة في إنشاء محتوى توعوي صحي لمدونة تهدف إلى نشر الوعي الصحي في المجتمع وتقديم نصائح طبية موثوقة.</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">كتابة</span>
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">تحرير</span>
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">محتوى صحي</span>
+                    </div>
+                    
+                    <button class="w-full bg-mint-500 hover:bg-mint-600 text-white py-2 px-4 rounded-lg transition-colors font-bold">
+                        عرض التفاصيل
+                    </button>
+                </div>
+            </div>
+
+            <!-- Opportunity Card 4 -->
+            <div id="opportunity-card-4" class="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">مدير مشروع</h3>
+                        <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full">حضوري</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-2">مشروع: حملة تشجير المدينة</p>
+                    <p class="text-gray-600 mb-4 line-clamp-3">نبحث عن متطوع ذو خبرة في إدارة المشاريع للإشراف على حملة تشجير في الأحياء السكنية وتنسيق جهود المتطوعين والتواصل مع الجهات المعنية.</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">إدارة</span>
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">تنظيم</span>
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">قيادة فريق</span>
+                    </div>
+                    
+                    <button class="w-full bg-mint-500 hover:bg-mint-600 text-white py-2 px-4 rounded-lg transition-colors font-bold">
+                        عرض التفاصيل
+                    </button>
+                </div>
+            </div>
+
+            <!-- Opportunity Card 5 -->
+            <div id="opportunity-card-5" class="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">مترجم</h3>
+                        <span class="bg-mint-100 text-mint-700 text-xs font-bold px-2 py-1 rounded-full">عن بعد</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-2">مشروع: ترجمة كتب أطفال</p>
+                    <p class="text-gray-600 mb-4 line-clamp-3">مطلوب مترجم للمساعدة في ترجمة سلسلة من كتب الأطفال التعليمية من الإنجليزية إلى العربية بأسلوب سلس ومناسب للأطفال.</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">ترجمة</span>
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">إنجليزي-عربي</span>
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">أدب أطفال</span>
+                    </div>
+                    
+                    <button class="w-full bg-mint-500 hover:bg-mint-600 text-white py-2 px-4 rounded-lg transition-colors font-bold">
+                        عرض التفاصيل
+                    </button>
+                </div>
+            </div>
+
+            <!-- Opportunity Card 6 -->
+            <div id="opportunity-card-6" class="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">مصمم جرافيك</h3>
+                        <span class="bg-mint-100 text-mint-700 text-xs font-bold px-2 py-1 rounded-full">عن بعد</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-2">مشروع: حملة توعية بيئية</p>
+                    <p class="text-gray-600 mb-4 line-clamp-3">نبحث عن مصمم جرافيك للمساعدة في تصميم مواد بصرية لحملة توعوية بيئية تستهدف طلاب المدارس والجامعات للتوعية بأهمية إعادة التدوير.</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">تصميم جرافيك</span>
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Photoshop</span>
+                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Illustrator</span>
+                    </div>
+                    
+                    <button class="w-full bg-mint-500 hover:bg-mint-600 text-white py-2 px-4 rounded-lg transition-colors font-bold">
+                        عرض التفاصيل
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div id="pagination" class="flex justify-center">
+            <div class="inline-flex rounded-md shadow-sm">
+                <button class="px-4 py-2 text-mint-600 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-50">
+                    <i class="fa-solid fa-chevron-right ml-1"></i>
+                    السابق
+                </button>
+                <button class="px-4 py-2 text-white bg-mint-500 border border-mint-500">1</button>
+                <button class="px-4 py-2 text-gray-700 bg-white border border-gray-300 hover:bg-gray-50">2</button>
+                <button class="px-4 py-2 text-gray-700 bg-white border border-gray-300 hover:bg-gray-50">3</button>
+                <button class="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-50">
+                    التالي
+                    <i class="fa-solid fa-chevron-left mr-1"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center justify-center md:justify-start">
+                        <img src="https://i.postimg.cc/15B2BWyF/Chat-GPT-Image-Aug-5-2025-06-14-20-PM.png" alt="شعار مزيد" class="w-10 ml-2">
+                        <span class="text-xl font-bold text-gray-800">مزيد</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mt-2 text-center md:text-right">منصة التطوع الأولى للمحترفين وأصحاب المشاريع</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <span class="text-gray-600 hover:text-mint-600 transition-colors cursor-pointer">
+                        <i class="fa-brands fa-twitter text-xl"></i>
+                    </span>
+                    <span class="text-gray-600 hover:text-mint-600 transition-colors cursor-pointer">
+                        <i class="fa-brands fa-linkedin text-xl"></i>
+                    </span>
+                    <span class="text-gray-600 hover:text-mint-600 transition-colors cursor-pointer">
+                        <i class="fa-brands fa-instagram text-xl"></i>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 mt-6 pt-6 text-center">
+                <p class="text-gray-500 text-sm">© 2025 مزيد. جميع الحقوق محفوظة</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

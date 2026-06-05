@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mint': {
+                            50: '#f0fdf6',
+                            100: '#dcfce9',
+                            200: '#bbf7d6',
+                            300: '#86efb8',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    },
+                    fontFamily: {
+                        'tajawal': ['Tajawal', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-tajawal">
+    <!-- Header -->
+    <header id="header" class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://i.postimg.cc/15B2BWyF/Chat-GPT-Image-Aug-5-2025-06-14-20-PM.png" alt="شعار مزيد" class="h-10">
+                <h1 class="text-xl font-bold text-gray-800 mr-3">منصة مزيد</h1>
+            </div>
+            <nav class="hidden md:flex space-x-1 space-x-reverse">
+                <span class="px-3 py-2 text-gray-600 hover:text-mint-600 transition-colors duration-200 cursor-pointer">الرئيسية</span>
+                <span class="px-3 py-2 text-gray-600 hover:text-mint-600 transition-colors duration-200 cursor-pointer">المشاريع</span>
+                <span class="px-3 py-2 text-gray-600 hover:text-mint-600 transition-colors duration-200 cursor-pointer">المتطوعون</span>
+                <span class="px-3 py-2 text-mint-600 font-bold hover:text-mint-700 transition-colors duration-200 cursor-pointer">تواصل معنا</span>
+            </nav>
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <button class="md:hidden text-gray-600 focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <button class="hidden md:block bg-mint-500 hover:bg-mint-600 text-white py-2 px-4 rounded-lg transition-colors duration-200">
+                    <i class="fa-solid fa-user ml-1"></i>
+                    حسابي
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="contact-page" class="container mx-auto px-4 py-12">
+        <!-- Page Header -->
+        <div id="contact-header" class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">تواصل معنا</h1>
+            <p class="text-gray-600 max-w-2xl mx-auto">نحن هنا للإجابة على استفساراتك ومساعدتك في كل ما تحتاج. يمكنك التواصل معنا مباشرة عبر النموذج أدناه أو عبر البريد الإلكتروني.</p>
+        </div>
+
+        <!-- Contact Content -->
+        <div id="contact-content" class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Contact Info -->
+            <div id="contact-info" class="md:col-span-1">
+                <div class="bg-white rounded-2xl shadow-md p-6 h-full">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">معلومات التواصل</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-mint-100 text-mint-600 p-3 rounded-full ml-4">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-700 mb-1">البريد الإلكتروني</h3>
+                                <p class="text-gray-600">hello@mazeed.org</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-mint-100 text-mint-600 p-3 rounded-full ml-4">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-700 mb-1">أوقات الرد</h3>
+                                <p class="text-gray-600">من الأحد إلى الخميس<br/>9:00 ص - 5:00 م</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-mint-100 text-mint-600 p-3 rounded-full ml-4">
+                                <i class="fa-solid fa-hashtag"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-700 mb-1">تابعنا</h3>
+                                <div class="flex space-x-3 space-x-reverse mt-2">
+                                    <span class="bg-gray-100 hover:bg-mint-100 text-gray-600 hover:text-mint-600 p-2 rounded-full transition-colors duration-200 cursor-pointer">
+                                        <i class="fa-brands fa-twitter"></i>
+                                    </span>
+                                    <span class="bg-gray-100 hover:bg-mint-100 text-gray-600 hover:text-mint-600 p-2 rounded-full transition-colors duration-200 cursor-pointer">
+                                        <i class="fa-brands fa-linkedin"></i>
+                                    </span>
+                                    <span class="bg-gray-100 hover:bg-mint-100 text-gray-600 hover:text-mint-600 p-2 rounded-full transition-colors duration-200 cursor-pointer">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Form -->
+            <div id="contact-form" class="md:col-span-2">
+                <div class="bg-white rounded-2xl shadow-md p-6 md:p-8">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">أرسل رسالة</h2>
+                    
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">الاسم</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-mint-500 focus:border-mint-500 transition-all duration-200" placeholder="أدخل اسمك الكامل">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-mint-500 focus:border-mint-500 transition-all duration-200" placeholder="أدخل بريدك الإلكتروني">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">الرسالة</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-mint-500 focus:border-mint-500 transition-all duration-200" placeholder="اكتب رسالتك هنا..."></textarea>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="consent" name="consent" class="h-4 w-4 text-mint-600 focus:ring-mint-500 border-gray-300 rounded">
+                                <label for="consent" class="mr-2 block text-sm text-gray-600">أوافق على <span class="text-mint-600 hover:underline cursor-pointer">سياسة الخصوصية</span></label>
+                            </div>
+                            <button type="submit" class="bg-mint-500 hover:bg-mint-600 text-white py-3 px-6 rounded-lg transition-colors duration-200 flex items-center">
+                                <span>إرسال</span>
+                                <i class="fa-solid fa-paper-plane mr-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FAQ Section -->
+        <div id="faq-section" class="max-w-4xl mx-auto mt-16">
+            <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">الأسئلة الشائعة</h2>
+            
+            <div class="space-y-4">
+                <div id="faq-1" class="bg-white rounded-xl shadow-sm p-5 transition-all duration-200 hover:shadow-md">
+                    <button class="flex justify-between items-center w-full text-right" onclick="toggleFaq('faq-1-answer')">
+                        <i class="fa-solid fa-chevron-down text-mint-500"></i>
+                        <span class="font-bold text-gray-800">كيف يمكنني التطوع في المشاريع؟</span>
+                    </button>
+                    <div id="faq-1-answer" class="hidden mt-4 text-gray-600">
+                        يمكنك التسجيل في المنصة كمتطوع، وبعد إكمال ملفك الشخصي، ستتمكن من استعراض المشاريع المتاحة والتقدم للتطوع فيها بناءً على مهاراتك واهتماماتك.
+                    </div>
+                </div>
+                
+                <div id="faq-2" class="bg-white rounded-xl shadow-sm p-5 transition-all duration-200 hover:shadow-md">
+                    <button class="flex justify-between items-center w-full text-right" onclick="toggleFaq('faq-2-answer')">
+                        <i class="fa-solid fa-chevron-down text-mint-500"></i>
+                        <span class="font-bold text-gray-800">كيف يمكنني إضافة مشروع؟</span>
+                    </button>
+                    <div id="faq-2-answer" class="hidden mt-4 text-gray-600">
+                        بعد تسجيل الدخول كصاحب مشروع، يمكنك النقر على "إضافة مشروع جديد" من لوحة التحكم الخاصة بك وملء النموذج بتفاصيل المشروع والمهارات المطلوبة.
+                    </div>
+                </div>
+                
+                <div id="faq-3" class="bg-white rounded-xl shadow-sm p-5 transition-all duration-200 hover:shadow-md">
+                    <button class="flex justify-between items-center w-full text-right" onclick="toggleFaq('faq-3-answer')">
+                        <i class="fa-solid fa-chevron-down text-mint-500"></i>
+                        <span class="font-bold text-gray-800">هل المنصة مجانية؟</span>
+                    </button>
+                    <div id="faq-3-answer" class="hidden mt-4 text-gray-600">
+                        نعم، منصة مزيد مجانية تماماً لكل من المتطوعين وأصحاب المشاريع. نهدف إلى تسهيل التواصل بين المتطوعين والمشاريع المجتمعية دون أي تكاليف.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-white mt-16 pt-12 pb-6 border-t border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-1">
+                    <img src="https://i.postimg.cc/15B2BWyF/Chat-GPT-Image-Aug-5-2025-06-14-20-PM.png" alt="شعار مزيد" class="h-12 mb-4">
+                    <p class="text-gray-600 mb-4">منصة تربط المتطوعين المحترفين بالمشاريع المجتمعية التي تحتاج إلى مهاراتهم.</p>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <span class="text-gray-500 hover:text-mint-600 transition-colors duration-200 cursor-pointer">
+                            <i class="fa-brands fa-twitter text-xl"></i>
+                        </span>
+                        <span class="text-gray-500 hover:text-mint-600 transition-colors duration-200 cursor-pointer">
+                            <i class="fa-brands fa-linkedin text-xl"></i>
+                        </span>
+                        <span class="text-gray-500 hover:text-mint-600 transition-colors duration-200 cursor-pointer">
+                            <i class="fa-brands fa-instagram text-xl"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-gray-800 mb-4">روابط سريعة</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-600 hover:text-mint-600 transition-colors duration-200 cursor-pointer">الرئيسية</span></li>
+                        <li><span class="text-gray-600 hover:text-mint-600 transition-colors duration-200 cursor-pointer">المشاريع</span></li>
+                        <li><span class="text-gray-600 hover:text-mint-600 transition-colors duration-200 cursor-pointer">المتطوعون</span></li>
+                        <li><span class="text-gray-600 hover:text-mint-600 transition-colors duration-200 cursor-pointer">تواصل معنا</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-gray-800 mb-4">الدعم</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-600 hover:text-mint-600 transition-colors duration-200 cursor-pointer">الأسئلة الشائعة</span></li>
+                        <li><span class="text-gray-600 hover:text-mint-600 transition-colors duration-200 cursor-pointer">الدليل الإرشادي</span></li>
+                        <li><span class="text-gray-600 hover:text-mint-600 transition-colors duration-200 cursor-pointer">الشروط والأحكام</span></li>
+                        <li><span class="text-gray-600 hover:text-mint-600 transition-colors duration-200 cursor-pointer">سياسة الخصوصية</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-gray-800 mb-4">اشترك في النشرة البريدية</h3>
+                    <p class="text-gray-600 mb-4">احصل على آخر المستجدات والفرص التطوعية</p>
+                    <div class="flex">
+                        <input type="email" placeholder="بريدك الإلكتروني" class="flex-1 px-4 py-2 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-mint-500 focus:border-mint-500">
+                        <button class="bg-mint-500 hover:bg-mint-600 text-white px-4 py-2 rounded-l-lg transition-colors duration-200">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-600 text-sm mb-4 md:mb-0">© 2025 منصة مزيد. جميع الحقوق محفوظة.</p>
+                <div class="flex space-x-4 space-x-reverse text-sm">
+                    <span class="text-gray-600 hover:text-mint-600 transition-colors duration-200 cursor-pointer">الشروط والأحكام</span>
+                    <span class="text-gray-600 hover:text-mint-600 transition-colors duration-200 cursor-pointer">سياسة الخصوصية</span>
+                    <span class="text-gray-600 hover:text-mint-600 transition-colors duration-200 cursor-pointer">ملفات تعريف الارتباط</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFaq(id) {
+            const element = document.getElementById(id);
+            if (element.classList.contains('hidden')) {
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

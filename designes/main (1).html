@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mint': {
+                            50: '#f0fdf6',
+                            100: '#dcfce9',
+                            200: '#bbf7d6',
+                            300: '#86efb8',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    },
+                    fontFamily: {
+                        'tajawal': ['Tajawal', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-tajawal">
+    <!-- Header -->
+    <header id="header" class="bg-white shadow-sm fixed w-full top-0 z-10">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <img src="https://i.postimg.cc/15B2BWyF/Chat-GPT-Image-Aug-5-2025-06-14-20-PM.png" alt="شعار مزيد" class="h-10">
+                <span class="text-xl font-bold text-gray-800 mr-2">مزيد</span>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="hidden md:flex items-center space-x-6 space-x-reverse">
+                <span class="text-mint-600 font-bold cursor-pointer">الرئيسية</span>
+                <span class="text-gray-600 hover:text-mint-600 transition-colors cursor-pointer">استكشف الفرص</span>
+                <span class="text-gray-600 hover:text-mint-600 transition-colors cursor-pointer">المجتمع</span>
+                <span class="text-gray-600 hover:text-mint-600 transition-colors cursor-pointer">عن مزيد</span>
+            </nav>
+            
+            <!-- User Menu -->
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <button class="text-gray-600 hover:text-mint-600 transition-colors">
+                    <i class="fa-regular fa-bell text-xl"></i>
+                </button>
+                <button class="text-gray-600 hover:text-mint-600 transition-colors">
+                    <i class="fa-regular fa-envelope text-xl"></i>
+                </button>
+                <div class="relative">
+                    <button id="user-menu-button" class="flex items-center focus:outline-none">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="صورة المستخدم" class="w-10 h-10 rounded-full border-2 border-mint-300">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="profile-page" class="pt-20 pb-12 px-4 md:px-0">
+        <div class="container mx-auto max-w-5xl">
+            <!-- Profile Card -->
+            <section id="profile-card" class="bg-white rounded-2xl shadow-md p-6 mb-8">
+                <div class="flex flex-col md:flex-row items-start">
+                    <!-- Profile Image -->
+                    <div class="mb-4 md:mb-0 md:ml-6">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="صورة المستخدم" class="w-24 h-24 rounded-full border-4 border-mint-200">
+                    </div>
+                    
+                    <!-- Profile Info -->
+                    <div class="flex-1">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <div>
+                                <h1 class="text-2xl font-bold text-gray-800">أحمد محمد</h1>
+                                <p class="text-gray-600">مطور واجهات مستخدم | شركة تقنية المستقبل</p>
+                            </div>
+                            <button class="mt-3 md:mt-0 bg-mint-500 hover:bg-mint-600 text-white px-4 py-2 rounded-lg font-bold transition-colors flex items-center justify-center">
+                                <i class="fa-solid fa-pen-to-square ml-2"></i>
+                                تعديل الملف الشخصي
+                            </button>
+                        </div>
+                        
+                        <!-- Bio -->
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-gray-700">مهندس برمجيات متحمس للتطوع في مشاريع تقنية تساهم في تطوير المجتمع. خبرة ٥ سنوات في تطوير تطبيقات الويب وتصميم واجهات المستخدم. أؤمن بأن التقنية يمكنها إحداث تغيير إيجابي في المجتمع.</p>
+                        </div>
+                        
+                        <!-- Stats -->
+                        <div class="flex flex-wrap">
+                            <div class="ml-6 mb-2">
+                                <span class="text-mint-600 font-bold">٤</span>
+                                <span class="text-gray-600">مشاريع مكتملة</span>
+                            </div>
+                            <div class="ml-6 mb-2">
+                                <span class="text-mint-600 font-bold">١٢</span>
+                                <span class="text-gray-600">ساعة تطوع</span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="text-mint-600 font-bold">٣</span>
+                                <span class="text-gray-600">توصيات</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Skills Section -->
+            <section id="skills-section" class="bg-white rounded-2xl shadow-md p-6 mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-gray-800">المهارات</h2>
+                    <button class="text-mint-600 hover:text-mint-700 transition-colors">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                </div>
+                
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-mint-100 text-mint-700 px-3 py-1 rounded-full text-sm">تطوير واجهات المستخدم</span>
+                    <span class="bg-mint-100 text-mint-700 px-3 py-1 rounded-full text-sm">React.js</span>
+                    <span class="bg-mint-100 text-mint-700 px-3 py-1 rounded-full text-sm">HTML/CSS</span>
+                    <span class="bg-mint-100 text-mint-700 px-3 py-1 rounded-full text-sm">JavaScript</span>
+                    <span class="bg-mint-100 text-mint-700 px-3 py-1 rounded-full text-sm">تصميم تجربة المستخدم</span>
+                    <span class="bg-mint-100 text-mint-700 px-3 py-1 rounded-full text-sm">تطوير تطبيقات الويب</span>
+                    <span class="bg-mint-100 text-mint-700 px-3 py-1 rounded-full text-sm">Node.js</span>
+                </div>
+            </section>
+            
+            <!-- Preferences Section -->
+            <section id="preferences-section" class="bg-white rounded-2xl shadow-md p-6 mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-gray-800">التفضيلات</h2>
+                    <button class="text-mint-600 hover:text-mint-700 transition-colors">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <h3 class="font-bold text-gray-700 mb-2">مجالات التطوع المفضلة</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-mint-100 text-mint-700 px-3 py-1 rounded-full text-sm">التعليم</span>
+                            <span class="bg-mint-100 text-mint-700 px-3 py-1 rounded-full text-sm">التكنولوجيا</span>
+                            <span class="bg-mint-100 text-mint-700 px-3 py-1 rounded-full text-sm">التنمية المجتمعية</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-bold text-gray-700 mb-2">توفر الوقت</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-mint-100 text-mint-700 px-3 py-1 rounded-full text-sm">عطلة نهاية الأسبوع</span>
+                            <span class="bg-mint-100 text-mint-700 px-3 py-1 rounded-full text-sm">مساءً</span>
+                            <span class="bg-mint-100 text-mint-700 px-3 py-1 rounded-full text-sm">٥-١٠ ساعات أسبوعياً</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- LinkedIn Share Section -->
+            <section id="linkedin-share" class="bg-white rounded-2xl shadow-md p-6">
+                <div class="flex flex-col md:flex-row items-start">
+                    <div class="bg-blue-100 rounded-full p-3 text-blue-600 mb-4 md:mb-0 md:ml-6 md:mt-2">
+                        <i class="fa-brands fa-linkedin-in text-2xl"></i>
+                    </div>
+                    
+                    <div class="flex-1">
+                        <h2 class="text-xl font-bold text-gray-800 mb-2">شارك أصدقاءك أنك بدأت العمل التطوعي!</h2>
+                        <p class="text-gray-600 mb-4">دعوة أصدقائك للانضمام يساعد في نشر ثقافة التطوع ويوسع شبكة المتطوعين.</p>
+                        
+                        <!-- LinkedIn Post Preview -->
+                        <div class="border border-gray-200 rounded-lg p-4 mb-4">
+                            <div class="flex items-center mb-3">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="صورة المستخدم" class="w-10 h-10 rounded-full ml-3">
+                                <div>
+                                    <p class="font-bold text-gray-800">أحمد محمد</p>
+                                    <p class="text-gray-500 text-sm">مشاركة عامة</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 mb-3">سعيد بالانضمام إلى منصة "مزيد" للتطوع المهني! أتطلع للمساهمة بمهاراتي في مشاريع مجتمعية مؤثرة ومقابلة متطوعين متحمسين مثلي. #مزيد #تطوع_مهني #تنمية_مجتمعية</p>
+                            <div class="bg-gray-50 rounded-lg p-3 flex items-center">
+                                <img src="https://i.postimg.cc/15B2BWyF/Chat-GPT-Image-Aug-5-2025-06-14-20-PM.png" alt="شعار مزيد" class="w-12 h-12 ml-3">
+                                <div>
+                                    <p class="font-bold text-gray-800">منصة مزيد للتطوع المهني</p>
+                                    <p class="text-gray-500 text-sm">mazeed.org</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold transition-colors flex items-center justify-center w-full md:w-auto">
+                            <i class="fa-brands fa-linkedin-in ml-2"></i>
+                            شارك على LinkedIn
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer id="footer" class="bg-white border-t border-gray-200 py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-6 md:mb-0">
+                    <img src="https://i.postimg.cc/15B2BWyF/Chat-GPT-Image-Aug-5-2025-06-14-20-PM.png" alt="شعار مزيد" class="h-10 ml-2">
+                    <span class="text-xl font-bold text-gray-800">مزيد</span>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-6 mb-6 md:mb-0">
+                    <span class="text-gray-600 hover:text-mint-600 transition-colors cursor-pointer">عن مزيد</span>
+                    <span class="text-gray-600 hover:text-mint-600 transition-colors cursor-pointer">كيف يعمل</span>
+                    <span class="text-gray-600 hover:text-mint-600 transition-colors cursor-pointer">الأسئلة الشائعة</span>
+                    <span class="text-gray-600 hover:text-mint-600 transition-colors cursor-pointer">اتصل بنا</span>
+                </div>
+                
+                <div class="flex gap-4">
+                    <span class="bg-gray-100 hover:bg-gray-200 text-gray-600 p-2 rounded-full transition-colors cursor-pointer">
+                        <i class="fa-brands fa-twitter"></i>
+                    </span>
+                    <span class="bg-gray-100 hover:bg-gray-200 text-gray-600 p-2 rounded-full transition-colors cursor-pointer">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </span>
+                    <span class="bg-gray-100 hover:bg-gray-200 text-gray-600 p-2 rounded-full transition-colors cursor-pointer">
+                        <i class="fa-brands fa-instagram"></i>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 mt-6 pt-6 text-center text-gray-500 text-sm">
+                <p>© 2025 منصة مزيد. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

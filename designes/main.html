@@ -1,0 +1,169 @@
+<!DOCTYPE html><html dir="rtl" lang="ar"><head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&amp;display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mint': '#6EE7B7',
+                        'sky-blue': '#7DD3FC',
+                        'light-beige': '#F5F5DC',
+                        'brand-blue': '#0A66C2',
+                        'brand-gray': '#F3F2F0'
+                    },
+                    fontFamily: {
+                        'tajawal': ['Tajawal', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white font-tajawal">
+
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-8">
+                <!-- Logo -->
+                <div id="logo" class="w-24">
+                    <img src="https://i.postimg.cc/15B2BWyF/Chat-GPT-Image-Aug-5-2025-06-14-20-PM.png" alt="شعار مزيد" class="w-auto h-8">
+                </div>
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8 text-gray-600">
+                    <span class="flex flex-col items-center hover:text-mint-600 cursor-pointer">
+                        <i class="fa-solid fa-compass text-xl"></i>
+                        <span class="text-xs font-semibold">اكتشف</span>
+                    </span>
+                    <span class="flex flex-col items-center hover:text-mint-600 cursor-pointer">
+                        <i class="fa-solid fa-users text-xl"></i>
+                        <span class="text-xs font-semibold">المتطوعون</span>
+                    </span>
+                    <span class="flex flex-col items-center hover:text-mint-600 cursor-pointer">
+                        <i class="fa-solid fa-briefcase text-xl"></i>
+                        <span class="text-xs font-semibold">المشاريع</span>
+                    </span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <span class="text-gray-700 font-bold px-5 py-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer">انضم الآن</span>
+                <span class="text-mint-600 border-2 border-mint-600 font-bold px-5 py-2 rounded-full hover:bg-mint-50 transition-colors cursor-pointer">تسجيل الدخول</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="pt-24 pb-12 bg-light-beige/30">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            
+            <!-- Left Column: Form -->
+            <div id="login-form-section" class="flex flex-col justify-center">
+                <h1 class="font-bold text-5xl text-gray-800 leading-tight mb-6">مرحباً بك في مجتمع <br> مزيد للمتطوعين</h1>
+                
+                <form id="login-form" class="space-y-4">
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني أو رقم الهاتف</label>
+                        <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-mint-500 focus:border-mint-500">
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">كلمة المرور</label>
+                        <input type="password" id="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-mint-500 focus:border-mint-500">
+                    </div>
+                    <span class="block text-sm text-mint-600 hover:underline font-semibold cursor-pointer">هل نسيت كلمة المرور؟</span>
+                    
+                    <button type="submit" class="w-full bg-mint-600 text-white font-bold py-3 rounded-full hover:bg-mint-700 transition-colors text-lg">تسجيل الدخول</button>
+                </form>
+
+                <div class="flex items-center my-4">
+                    <hr class="w-full border-gray-300">
+                    <span class="px-2 text-gray-500 text-sm">أو</span>
+                    <hr class="w-full border-gray-300">
+                </div>
+
+                <button id="linkedin-login-btn" class="w-full bg-white border border-gray-400 text-gray-700 py-3 px-6 rounded-full font-bold flex items-center justify-center hover:bg-gray-50 transition-colors">
+                    <i class="fa-brands fa-linkedin ml-3 text-xl text-[#0A66C2]"></i>
+                    المتابعة باستخدام LinkedIn
+                </button>
+                 <p class="text-sm text-gray-500 text-center mt-4">بالنقر على "متابعة"، فإنك توافق على <span class="text-mint-600 hover:underline cursor-pointer">شروط المستخدم</span> و<span class="text-mint-600 hover:underline cursor-pointer">سياسة الخصوصية</span> الخاصة بمنصة مزيد.</p>
+            </div>
+
+            <!-- Right Column: Illustration -->
+            <div id="illustration-section" class="hidden md:block">
+    <img class="w-full h-auto object-contain" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/1b109fae1c-73c9a0ebd1e596c0ac0d.png" alt="Abstract digital art inspired by the fluid, rounded shapes of the Arabic">
+</div>
+
+        </div>
+    </main>
+    
+    <!-- User Type Selection Modal (Initially Hidden) -->
+    <div id="user-type-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div id="user-type-card" class="bg-white rounded-2xl shadow-lg p-8 max-w-lg w-full transition-all duration-300 transform scale-95">
+            <div id="user-type-view" class="flex flex-col items-center">
+                <div id="logo-small" class="mb-6 w-16">
+                    <img src="https://i.postimg.cc/15B2BWyF/Chat-GPT-Image-Aug-5-2025-06-14-20-PM.png" alt="شعار مزيد" class="w-full">
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">أكمل كـ...</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                    <button id="volunteer-btn" class="bg-white hover:bg-mint-50 border-2 border-mint-400 text-gray-800 py-6 px-4 rounded-xl flex flex-col items-center justify-center transition-all duration-200 group">
+                        <div class="bg-mint-100 text-mint-600 p-3 rounded-full mb-3 group-hover:bg-mint-200 transition-all duration-200">
+                            <i class="fa-solid fa-hand-holding-heart text-xl"></i>
+                        </div>
+                        <span class="font-bold text-lg">متطوع</span>
+                        <p class="text-sm text-gray-500 mt-2 text-center">قدم مهاراتك لمساعدة المشاريع</p>
+                    </button>
+                    <button id="project-owner-btn" class="bg-white hover:bg-mint-50 border-2 border-mint-400 text-gray-800 py-6 px-4 rounded-xl flex flex-col items-center justify-center transition-all duration-200 group">
+                        <div class="bg-mint-100 text-mint-600 p-3 rounded-full mb-3 group-hover:bg-mint-200 transition-all duration-200">
+                            <i class="fa-solid fa-briefcase text-xl"></i>
+                        </div>
+                        <span class="font-bold text-lg">صاحب مشروع</span>
+                        <p class="text-sm text-gray-500 mt-2 text-center">اعثر على متطوعين لمشروعك</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock function to show user type selection after login attempt
+        function showUserTypeSelection() {
+            const modal = document.getElementById('user-type-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('user-type-card').classList.remove('scale-95');
+                document.getElementById('user-type-card').classList.add('scale-100');
+            }, 10);
+        }
+
+        // Add event listener to the login form
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent actual form submission
+            showUserTypeSelection();
+        });
+        
+         document.getElementById('linkedin-login-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            showUserTypeSelection();
+        });
+
+        // Close modal if clicking outside the card
+        document.getElementById('user-type-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                 const modal = document.getElementById('user-type-modal');
+                 const card = document.getElementById('user-type-card');
+                 card.classList.remove('scale-100');
+                 card.classList.add('scale-95');
+                 setTimeout(() => {
+                    modal.classList.add('hidden');
+                 }, 300);
+            }
+        });
+    </script>
+
+</body></html>
