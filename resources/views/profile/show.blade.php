@@ -4,6 +4,22 @@
 <main class="container mx-auto px-4 md:px-8 py-8">
     <div class="max-w-3xl mx-auto">
 
+        {{-- LinkedIn Token Warning (for current user) --}}
+        @if(auth()->id() === $user->id && $user->linkedin_id && !$user->linkedin_token_expires_at)
+            <div class="mb-6 bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-4 flex items-start gap-3">
+                <i class="fa-solid fa-exclamation-circle text-yellow-600 mt-0.5 shrink-0"></i>
+                <div class="flex-1">
+                    <p class="font-semibold text-yellow-900 mb-1">تنبيه: توصيل LinkedIn يحتاج تحديث</p>
+                    <p class="text-sm text-yellow-800 mb-2">يرجى إعادة ربط حساب LinkedIn الخاص بك لتتمكن من مشاركة الشارات على LinkedIn.</p>
+                    <a href="{{ route('auth.linkedin') }}"
+                       class="inline-flex items-center gap-1.5 text-sm border border-yellow-400 hover:border-yellow-500 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 px-3 py-1.5 rounded-lg transition font-medium">
+                        <i class="fa-brands fa-linkedin text-xs"></i>
+                        تحديث LinkedIn
+                    </a>
+                </div>
+            </div>
+        @endif
+
         {{-- Profile Header --}}
         <div class="bg-white rounded-2xl shadow-sm overflow-hidden mb-6">
             <div class="h-24 bg-gradient-to-r from-green-500 to-green-700"></div>
@@ -28,6 +44,12 @@
                             <a href="{{ $user->linkedin_profile_url }}" target="_blank" rel="noopener noreferrer"
                                class="text-[#0A66C2] hover:opacity-75 transition">
                                 <i class="fa-brands fa-linkedin text-xl"></i>
+                            </a>
+                        @elseif(auth()->id() === $user->id)
+                            <a href="{{ route('auth.linkedin') }}"
+                               class="inline-flex items-center gap-1 text-sm border border-blue-200 hover:border-blue-400 text-blue-600 hover:text-blue-700 px-3 py-1.5 rounded-lg transition bg-blue-50 hover:bg-blue-100">
+                                <i class="fa-brands fa-linkedin text-xs"></i>
+                                ربط LinkedIn
                             </a>
                         @endif
                     </div>

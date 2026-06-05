@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,29 @@ class BadgeController extends Controller
     public function share(Request $request): RedirectResponse
     {
         $user = Auth::user();
+
+        // Check if token is valid first
+        if (! $user->linkedin_access_token || ! $this->isTokenValid($user->linkedin_access_token, $user->id)) {
+            // Token is invalid/expired, redirect to LinkedIn OAuth for refresh
+            session(['redirect_after_linkedin' => 'badge.share.now']);
+            Log::info('Redirecting user '.$user->id.' to LinkedIn OAuth for token refresh');
+
+            return redirect()->route('auth.linkedin');
+        }
+
+        return $this->performShare($user);
+    }
+
+    public function shareNow(Request $request): RedirectResponse
+    {
+        $user = Auth::user();
+
+        // This is called after LinkedIn OAuth token refresh
+        return $this->performShare($user);
+    }
+
+    private function performShare(object $user): RedirectResponse
+    {
         $badgePath = 'badges/'.$user->id.'.png';
 
         if (! Storage::disk('public')->exists($badgePath)) {
@@ -43,11 +67,11 @@ class BadgeController extends Controller
             session(['badge_generated' => true]);
 
             return redirect()->route('home')
-                ->with('success', 'Shared to LinkedIn successfully!');
+                ->with('success', 'تم المشاركة على LinkedIn بنجاح!');
         }
 
         return redirect()->route('badge.show')
-            ->with('error', 'Could not share to LinkedIn. Please try again.');
+            ->with('error', 'لم نتمكن من مشاركة الشارة. يرجى حاول مرة أخرى.');
     }
 
     private function generateBadge(object $user): void
@@ -140,12 +164,14 @@ class BadgeController extends Controller
         // Check if token is valid (in development, tokens from seeders are fake)
         if (! $user->linkedin_access_token) {
             Log::warning('LinkedIn share failed: No access token for user '.$user->id);
+
             return false;
         }
 
         // Skip sharing if token appears to be development/seeded data
         if (strlen($user->linkedin_access_token) < 50) {
             Log::info('LinkedIn share skipped: Development token detected for user '.$user->id);
+
             return true; // Return true to not show error, but don't actually share
         }
 
@@ -170,17 +196,39 @@ class BadgeController extends Controller
                     'status' => $registerResponse->status(),
                     'body' => $registerResponse->body(),
                 ]);
+
                 return false;
             }
 
-            $uploadUrl = $registerResponse->json('value.uploadMechanism.com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest.uploadUrl');
-            $assetUrn = $registerResponse->json('value.asset');
+            $responseData = $registerResponse->json();
+            Log::info('LinkedIn register upload response', [
+                'user_id' => $user->id,
+                'response_structure' => $responseData,
+            ]);
+
+            // Try to extract uploadUrl and assetUrn from response
+            $uploadUrl = null;
+            $assetUrn = null;
+
+            if (isset($responseData['value'])) {
+                // Try nested path for uploadUrl
+                if (isset($responseData['value']['uploadMechanism']['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest']['uploadUrl'])) {
+                    $uploadUrl = $responseData['value']['uploadMechanism']['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest']['uploadUrl'];
+                }
+                // Asset is usually in value.asset
+                if (isset($responseData['value']['asset'])) {
+                    $assetUrn = $responseData['value']['asset'];
+                }
+            }
 
             if (! $uploadUrl || ! $assetUrn) {
-                Log::warning('LinkedIn register upload missing required fields', [
+                Log::error('LinkedIn register upload missing required fields', [
                     'user_id' => $user->id,
-                    'response' => $registerResponse->json(),
+                    'uploadUrl' => $uploadUrl,
+                    'assetUrn' => $assetUrn,
+                    'full_response' => $responseData,
                 ]);
+
                 return false;
             }
 
@@ -197,6 +245,7 @@ class BadgeController extends Controller
                     'status' => $uploadResponse->status(),
                     'body' => $uploadResponse->body(),
                 ]);
+
                 return false;
             }
 
@@ -231,10 +280,12 @@ class BadgeController extends Controller
                     'status' => $postResponse->status(),
                     'body' => $postResponse->body(),
                 ]);
+
                 return false;
             }
 
             Log::info('LinkedIn share successful for user '.$user->id);
+
             return true;
         } catch (\Exception $e) {
             Log::error('LinkedIn share exception', [
@@ -243,7 +294,39 @@ class BadgeController extends Controller
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),
             ]);
+
             return false;
         }
+    }
+
+    /**
+     * Validate if the LinkedIn access token is still valid
+     */
+    private function isTokenValid(string $token, int $userId): bool
+    {
+        // Check if token is empty
+        if (empty($token) || strlen($token) < 50) {
+            Log::warning('LinkedIn token invalid: too short or empty', [
+                'user_id' => $userId,
+                'token_length' => strlen($token),
+            ]);
+
+            return false;
+        }
+
+        // Check if token is expired
+        $user = User::find($userId);
+        if ($user && $user->linkedin_token_expires_at && $user->linkedin_token_expires_at->isPast()) {
+            Log::warning('LinkedIn token expired', [
+                'user_id' => $userId,
+                'expired_at' => $user->linkedin_token_expires_at,
+            ]);
+
+            return false;
+        }
+
+        // Token seems valid, return true
+        // We don't make an API call to validate because LinkedIn requires specific permissions
+        return true;
     }
 }

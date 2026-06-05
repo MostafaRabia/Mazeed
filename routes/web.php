@@ -29,6 +29,7 @@ Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projec
 // Badge (LinkedIn share)
 Route::get('/badge', [BadgeController::class, 'show'])->name('badge.show')->middleware('auth');
 Route::post('/badge/share', [BadgeController::class, 'share'])->name('badge.share')->middleware('auth');
+Route::get('/badge/share-now', [BadgeController::class, 'shareNow'])->name('badge.share.now')->middleware('auth');
 Route::post('/badge/skip', function () {
     session(['badge_generated' => true]);
 

@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Laravel\Socialite\Exceptions\InvalidStateException;
 use Laravel\Socialite\Facades\Socialite;
 
 class LinkedInController extends Controller
@@ -20,10 +22,31 @@ class LinkedInController extends Controller
 
     public function callback(): RedirectResponse
     {
-        $socialiteUser = Socialite::driver('linkedin')->user();
+        try {
+            $socialiteUser = Socialite::driver('linkedin')->user();
+        } catch (InvalidStateException $e) {
+            // User cancelled LinkedIn auth or session expired
+            Log::warning('LinkedIn OAuth cancelled or state mismatch', [
+                'error' => $e->getMessage(),
+            ]);
+
+            // Clear the redirect flag if it exists
+            session()->forget('redirect_after_linkedin');
+
+            return redirect()->route('badge.show')
+                ->with('error', 'تم إلغاء التوصيل. يرجى المحاولة مرة أخرى.');
+        }
 
         $linkedinId = $socialiteUser->getId();
         $accessToken = $socialiteUser->token;
+        $expiresIn = $socialiteUser->expiresIn ?? 3600;
+
+        Log::info('LinkedIn callback received', [
+            'linkedin_id' => $linkedinId,
+            'token_length' => strlen($accessToken),
+            'expires_in' => $expiresIn,
+            'socialite_data' => $socialiteUser->getRaw(),
+        ]);
 
         $profileData = $this->fetchExtendedProfile($accessToken);
 
@@ -36,13 +59,19 @@ class LinkedInController extends Controller
                 'email' => $socialiteUser->getEmail(),
                 'avatar_url' => $socialiteUser->getAvatar(),
                 'linkedin_access_token' => $accessToken,
-                'linkedin_token_expires_at' => now()->addSeconds($socialiteUser->expiresIn ?? 3600),
+                'linkedin_token_expires_at' => now()->addSeconds($expiresIn),
                 'headline' => $profileData['headline'] ?? null,
                 'linkedin_profile_url' => $profileData['profileUrl'] ?? null,
             ]
         );
 
         Auth::login($user, true);
+
+        // Check if there's a redirect after LinkedIn callback
+        $redirectAfter = session()->pull('redirect_after_linkedin');
+        if ($redirectAfter) {
+            return redirect()->route($redirectAfter);
+        }
 
         if ($isNewUser) {
             return redirect()->route('badge.show');
