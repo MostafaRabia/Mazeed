@@ -1,5 +1,5 @@
 # Use official PHP image with Apache
-FROM php:8.3-apache
+FROM php:8.4-apache
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libonig-dev \
     libxml2-dev \
+    libicu-dev \
     zip \
     unzip \
     npm \
@@ -21,6 +22,8 @@ RUN apt-get update && apt-get install -y \
     pdo_mysql \
     mbstring \
     xml \
+    intl \
+    zip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
