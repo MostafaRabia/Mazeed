@@ -1,8 +1,21 @@
-# Use official PHP image with Apache
+# Stage 1: Build assets with Node.js
+FROM node:22-alpine AS node-builder
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm ci
+
+COPY . .
+
+RUN npm run build
+
+# Stage 2: Build PHP application
 FROM php:8.4-apache
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
+# Install system dependencies for PHP
+RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     curl \
     libpng-dev \
@@ -11,9 +24,7 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     libicu-dev \
-    zip \
     unzip \
-    npm \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
     gd \
@@ -44,6 +55,9 @@ WORKDIR /var/www/html
 # Copy project files
 COPY . .
 
+# Copy built assets from node-builder stage
+COPY --from=node-builder /app/public/build ./public/build
+
 # Create storage directory and set permissions
 RUN mkdir -p storage/app/public storage/framework/cache storage/framework/sessions storage/framework/views storage/logs \
     && chown -R www-data:www-data /var/www/html \
@@ -52,14 +66,14 @@ RUN mkdir -p storage/app/public storage/framework/cache storage/framework/sessio
 # Install PHP dependencies
 RUN composer install --optimize-autoloader --no-dev
 
-# Install Node dependencies and build assets
-RUN npm install && npm run build
-
 # Generate optimized Laravel files
 RUN php artisan optimize
 
 # Expose port
 EXPOSE 80
+
+# Start Apache
+CMD ["apache2-foreground"]
 
 # Start Apache
 CMD ["apache2-foreground"]
