@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: mazeed-app
+    runtime: php
+    plan: free
+    buildCommand: bash build.sh
+    startCommand: php -S 0.0.0.0:$PORT public/index.php
+    healthCheckPath: /
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: CACHE_DRIVER
+        value: file
+      - key: SESSION_DRIVER
+        value: file
+      - key: FILESYSTEM_DISK
+        value: public
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: APP_KEY
+        sync: false
