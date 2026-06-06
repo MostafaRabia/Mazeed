@@ -4,22 +4,3 @@ services:
     runtime: docker
     plan: free
     healthCheckPath: /
-    envVars:
-      - key: APP_ENV
-        value: production
-      - key: APP_DEBUG
-        value: false
-      - key: LOG_CHANNEL
-        value: stderr
-      - key: CACHE_DRIVER
-        value: file
-      - key: SESSION_DRIVER
-        value: file
-      - key: FILESYSTEM_DISK
-        value: public
-      - key: QUEUE_CONNECTION
-        value: sync
-      - key: DB_CONNECTION
-        value: mysql
-      - key: DB_PORT
-        value: "3306"
