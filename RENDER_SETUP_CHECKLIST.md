@@ -1,4 +1,4 @@
-# Render.com Deployment Checklist
+# Render.com Docker Deployment Checklist
 
 Use this checklist to ensure everything is properly configured before deploying to Render.
 

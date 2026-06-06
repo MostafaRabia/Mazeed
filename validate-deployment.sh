@@ -55,6 +55,31 @@ else
     FAILED=$((FAILED+1))
 fi
 
+# Check 4b: Docker configuration
+echo "4b. Checking Docker configuration..."
+if [ -f "Dockerfile" ]; then
+    echo "   ✓ Dockerfile found"
+    if [ -f ".dockerignore" ]; then
+        echo "   ✓ .dockerignore found"
+        PASSED=$((PASSED+1))
+    else
+        echo "   ✗ .dockerignore not found"
+        FAILED=$((FAILED+1))
+    fi
+else
+    echo "   ✗ Dockerfile not found"
+    FAILED=$((FAILED+1))
+fi
+
+# Check 4c: Docker Compose for local development
+echo "4c. Checking docker-compose.yml..."
+if [ -f "docker-compose.yml" ]; then
+    echo "   ✓ docker-compose.yml found (local development ready)"
+    PASSED=$((PASSED+1))
+else
+    echo "   ⚠ docker-compose.yml not found (optional for local development)"
+fi
+
 # Check 5: Build script
 echo "5. Checking build script..."
 if [ -f "build.sh" ]; then
@@ -140,14 +165,15 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 
 if [ $FAILED -eq 0 ]; then
     echo ""
-    echo "✅ Project is ready for Render.com deployment!"
+    echo "✅ Project is ready for Docker deployment on Render.com!"
     echo ""
     echo "Next steps:"
-    echo "1. Push to GitHub: git push origin main"
-    echo "2. Connect to Render.com dashboard"
-    echo "3. Create a new Web Service"
-    echo "4. Set environment variables"
-    echo "5. Deploy!"
+    echo "1. Test locally: docker-compose up -d"
+    echo "2. Push to GitHub: git push origin main"
+    echo "3. Connect to Render.com dashboard"
+    echo "4. Create a new Web Service with Docker runtime"
+    echo "5. Set environment variables"
+    echo "6. Deploy!"
     exit 0
 else
     echo ""

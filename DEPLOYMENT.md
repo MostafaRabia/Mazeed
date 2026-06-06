@@ -1,40 +1,67 @@
-# Deployment to Render.com
+# Deployment to Render.com with Docker
 
-This guide explains how to deploy the Mazeed project to Render.com.
+This guide explains how to deploy the Mazeed project to Render.com using Docker.
 
 ## Prerequisites
 
 - A Render.com account
 - The project pushed to GitHub
 - LinkedIn OAuth credentials
+- Docker configured in the project (Dockerfile included)
 
 ## Deployment Steps
 
-### 1. Connect Your Repository to Render
+### 1. Local Docker Testing (Optional)
+
+Before deploying to Render, you can test locally with Docker:
+
+```bash
+# Start Docker containers
+docker-compose up -d
+
+# Access the app at http://localhost:8000
+# Database admin at http://localhost:8080 (phpMyAdmin)
+
+# View logs
+docker-compose logs -f app
+
+# Run migrations
+docker-compose exec app php artisan migrate
+
+# Stop containers
+docker-compose down
+```
+
+### 2. Connect Your Repository to Render
 
 1. Go to [Render Dashboard](https://dashboard.render.com)
 2. Click "New +" → "Web Service"
 3. Connect your GitHub repository
 4. Select the `Mazeed` repository
 
-### 2. Configure the Service
+### 3. Configure the Docker Service
 
 #### Basic Settings
 - **Name**: `mazeed-app`
-- **Runtime**: `PHP`
+- **Runtime**: `Docker`
 - **Plan**: Free (or paid if needed)
-- **Build Command**: `bash build.sh`
-- **Start Command**: `php -S 0.0.0.0:$PORT public/index.php`
+- **Region**: Choose closest to your location
+- **Branch**: `main`
+
+Render will automatically:
+- Build the Docker image from the Dockerfile
+- Run migrations on deployment
+- Start the application with Apache
 
 #### Environment Variables
 
-Add the following environment variables in the Render dashboard:
+Add the following environment variables in the Render dashboard (look for "Environment"):
 
 ```env
 APP_NAME=Mazeed
 APP_ENV=production
 APP_DEBUG=false
-APP_KEY=base64:YOUR_APP_KEY_HERE  # Copy from your local .env
+APP_KEY=base64:YOUR_APP_KEY_HERE
 APP_URL=https://your-render-domain.onrender.com
 
 LOG_CHANNEL=stderr
@@ -54,111 +81,165 @@ LINKEDIN_CLIENT_SECRET=your_linkedin_client_secret
 LINKEDIN_REDIRECT=https://your-render-domain.onrender.com/auth/linkedin/callback
 ```
 
-### 3. Set Up MySQL Database (Optional)
+### 4. Set Up MySQL Database
 
-If using Render's MySQL service:
+You have these options:
 
+**Option A: Render's MySQL Service (Easiest)**
 1. In Render Dashboard, click "New +" → "MySQL"
 2. Configure your database
 3. Copy the connection details
-4. Use these details for the `DB_*` environment variables
+4. Use these for `DB_*` environment variables
 
-Alternatively, you can use:
+**Option B: External Database Service**
 - AWS RDS
 - DigitalOcean Managed Database
 - Any other external MySQL service
 
-### 4. Configure LinkedIn OAuth
-
-1. Go to your LinkedIn App settings
-2. Update the "Authorized redirect URLs" to:
-   ```
-   https://your-render-domain.onrender.com/auth/linkedin/callback
-   ```
-
 ### 5. Deploy
 
-1. Click "Deploy" in Render Dashboard
-2. Monitor the build logs
-3. Once deployment is complete, your app will be live at `https://your-render-domain.onrender.com`
+1. Review all settings
+2. Click "Create Web Service"
+3. Render automatically starts the deployment
+4. Monitor deployment in the "Logs" tab
 
-### 6. Run Migrations (First Time)
+### 6. Post-Deployment Configuration
 
-After the first deployment, you may need to manually trigger migrations:
+#### Get Your Render Domain
+- Note your assigned domain: `https://your-service.onrender.com`
+- Update `APP_URL` environment variable with your domain
+- Redeploy to apply URL change
 
-1. Go to your Render service dashboard
-2. Click "Shell" to access the service shell
-3. Run: `php artisan migrate`
+#### Configure LinkedIn OAuth
+1. Go to LinkedIn App settings
+2. Update "Authorized redirect URLs":
+   - Add: `https://your-service.onrender.com/auth/linkedin/callback`
+3. Save settings
 
-Or, you can SSH into the service and run migrations manually.
+#### Test the Application
+- Visit `https://your-service.onrender.com`
+- Test user registration/login
+- Test LinkedIn OAuth flow
+- Test badge generation
+- Test badge sharing to LinkedIn
 
-## Important Notes
+## Docker Files Reference
 
-### Static Files & Public Directory
-- Render serves static files from the `public/` directory
-- Make sure to run `npm run build` to generate CSS/JS assets
-- Badge images are stored in `storage/app/public/badges/`
+### Dockerfile
+- PHP 8.3 with Apache
+- Pre-installs all PHP extensions needed for Laravel
+- Installs dependencies via Composer
+- Builds frontend assets via npm
+- Optimizes Laravel configuration
 
-### Environment Variables
-- **APP_KEY**: Generate locally with `php artisan key:generate` and copy the value
-- **DATABASE**: Render's free tier MySQL has limitations. For production, use a dedicated database service
-- **LinkedIn Credentials**: Keep these secure! Use Render's environment variables, not in version control
+### docker-compose.yml
+Local development setup with:
+- Laravel application (Apache + PHP)
+- MySQL 8.0 database
+- phpMyAdmin for database management
 
-### Performance
-- Free tier Render services spin down after 15 minutes of inactivity
-- For production, upgrade to a paid plan
-- Consider using a cache driver like Redis for better performance
+### .dockerignore
+Excludes unnecessary files from Docker build context for faster builds
 
-### Storage
-- Temporary files are stored in `/tmp` (ephemeral)
-- Persistent storage is in `storage/app/public/`
-- For badge images: ensure they're being saved to `storage/app/public/badges/`
+## Storage & Persistence
 
-### Logs
-- View logs in the Render dashboard under the service's "Logs" tab
-- Set `LOG_CHANNEL=stderr` to ensure logs appear in Render's log viewer
+- **Badge Images**: Stored in `storage/app/public/badges/`
+- **Database**: Persisted in external MySQL database
+- **Logs**: Captured from stderr (visible in Render dashboard)
+- **Temporary Files**: Stored in `/tmp` (ephemeral - cleared on restart)
 
 ## Troubleshooting
 
-### Build Fails
-- Check the build logs in Render Dashboard
-- Ensure `build.sh` is executable: `chmod +x build.sh`
+### Docker Build Fails
+**Problem**: Build logs show errors
+**Solution**:
+- Check build logs in Render Dashboard ("Logs" tab)
 - Verify all environment variables are set
+- Ensure Dockerfile is valid: `docker build -t mazeed:test .`
+- Test locally: `docker-compose build`
 
-### Database Connection Errors
-- Verify `DB_HOST`, `DB_USERNAME`, `DB_PASSWORD` are correct
-- Check if the database is accessible from Render (firewall rules)
-- Ensure the database exists and migrations have run
+### App Won't Start
+**Problem**: Service crashes immediately after deployment
+**Solution**:
+- [ ] Check application logs in Render dashboard
+- [ ] Verify `APP_KEY` is set and valid
+- [ ] Check database connectivity
+- [ ] Verify `DB_*` environment variables match database
 
-### Static Files Not Loading
-- Run `npm run build` in your build command
-- Check that files are in `public/` directory
-- Verify `FILESYSTEM_DISK=public` is set
+### Database Connection Error
+**Problem**: "Can't connect to MySQL server"
+**Solution**:
+- [ ] Verify all `DB_*` environment variables
+- [ ] Check database is running
+- [ ] Test connection from Render shell
+- [ ] Check firewall allows Render IP
 
 ### LinkedIn OAuth Fails
-- Verify `LINKEDIN_REDIRECT` matches your Render domain exactly
-- Check LinkedIn app settings for correct redirect URI
-- Ensure `LINKEDIN_CLIENT_ID` and `LINKEDIN_CLIENT_SECRET` are correct
+**Problem**: "Invalid redirect URI"
+**Solution**:
+- [ ] Verify `LINKEDIN_REDIRECT` matches LinkedIn app settings exactly
+- [ ] Ensure domain matches your Render domain
+- [ ] Clear browser cache and cookies
+
+### Static Files Not Loading
+**Problem**: CSS/JS files return 404
+**Solution**:
+- [ ] Verify npm build ran in Dockerfile
+- [ ] Check files exist in `public/build/`
+- [ ] Verify `FILESYSTEM_DISK=public` is set
+
+## Docker Commands for Local Development
+
+```bash
+# Start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f app
+
+# Run artisan commands
+docker-compose exec app php artisan tinker
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan db:seed
+
+# Access container shell
+docker-compose exec app bash
+
+# Rebuild image
+docker-compose build --no-cache
+
+# Stop services
+docker-compose down
+
+# Remove volumes (careful - deletes database)
+docker-compose down -v
+```
+
+## Performance Notes
+
+- Free tier Render services spin down after 15 minutes of inactivity
+- For production, upgrade to a paid plan
+- Docker containers have better performance than traditional shared hosting
 
 ## Updating the Application
 
 1. Make changes locally
-2. Push to GitHub
-3. Render automatically detects the push
-4. Deployment starts automatically (if set up with auto-deploy)
-5. Monitor deployment in Render Dashboard
+2. Test with `docker-compose up -d`
+3. Push to GitHub
+4. Render automatically detects the push
+5. Docker image rebuilds and redeploys automatically
+6. Monitor deployment in Render Dashboard
 
-## Rolling Back
+## Support Resources
 
-If a deployment fails:
-
-1. Go to your service in Render Dashboard
-2. Click "Deployments"
-3. Select a previous successful deployment
-4. Click "Deploy" to restore it
-
-## Support
-
-- [Render Documentation](https://render.com/docs)
+- [Render.com Documentation](https://render.com/docs)
+- [Render Docker Guide](https://render.com/docs/deploy-docker)
+- [Docker Documentation](https://docs.docker.com/)
 - [Laravel Deployment Guide](https://laravel.com/docs/deployment)
 - [Render Community Forum](https://community.render.com)
+
+---
+
+**Last Updated**: 2026-06-06
+**Deployment Method**: Docker
+**Status**: Ready for Deployment ✅
