@@ -155,7 +155,7 @@ class BadgeController extends Controller
             $font->align('center');
         });
 
-        Storage::put('badges/'.$user->id.'.png', $image->toPng()->toString());
+        Storage::put('badges/'.$user->id.'.png', (string) $image->encodeUsingFormat('png'));
     }
 
     private function shareToLinkedIn(object $user, string $badgePath): bool
