@@ -20,11 +20,11 @@ class BadgeController extends Controller
         $user = Auth::user();
         $badgePath = 'badges/'.$user->id.'.png';
 
-        if (! Storage::disk('public')->exists($badgePath)) {
+        if (! Storage::exists($badgePath)) {
             $this->generateBadge($user);
         }
 
-        $badgeUrl = Storage::disk('public')->url($badgePath);
+        $badgeUrl = Storage::temporaryUrl($badgePath, now()->addHour());
 
         return view('badge.show', compact('badgeUrl'));
     }
@@ -57,7 +57,7 @@ class BadgeController extends Controller
     {
         $badgePath = 'badges/'.$user->id.'.png';
 
-        if (! Storage::disk('public')->exists($badgePath)) {
+        if (! Storage::exists($badgePath)) {
             $this->generateBadge($user);
         }
 
@@ -155,8 +155,7 @@ class BadgeController extends Controller
             $font->align('center');
         });
 
-        Storage::disk('public')->makeDirectory('badges');
-        $image->save(Storage::disk('public')->path('badges/'.$user->id.'.png'));
+        Storage::put('badges/'.$user->id.'.png', $image->toPng()->toString());
     }
 
     private function shareToLinkedIn(object $user, string $badgePath): bool
@@ -233,7 +232,7 @@ class BadgeController extends Controller
             }
 
             // Step 2: upload image
-            $imageContent = Storage::disk('public')->get($badgePath);
+            $imageContent = Storage::get($badgePath);
             $uploadResponse = Http::withToken($user->linkedin_access_token)
                 ->timeout(10)
                 ->withBody($imageContent, 'image/png')
