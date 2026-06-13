@@ -38,7 +38,7 @@ return [
     'linkedin' => [
         'client_id' => env('LINKEDIN_CLIENT_ID'),
         'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
-        'redirect' => env('LINKEDIN_REDIRECT'),
+        'redirect' => rtrim(env('APP_URL', 'http://localhost'), '/').'/auth/linkedin/callback',
     ],
 
 ];

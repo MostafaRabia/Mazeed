@@ -17,13 +17,16 @@ class LinkedInController extends Controller
     {
         return Socialite::driver('linkedin')
             ->scopes(['openid', 'profile', 'email', 'w_member_social'])
+            ->redirectUrl(config('services.linkedin.redirect'))
             ->redirect();
     }
 
     public function callback(): RedirectResponse
     {
         try {
-            $socialiteUser = Socialite::driver('linkedin')->user();
+            $socialiteUser = Socialite::driver('linkedin')
+                ->redirectUrl(config('services.linkedin.redirect'))
+                ->user();
         } catch (InvalidStateException $e) {
             // User cancelled LinkedIn auth or session expired
             Log::warning('LinkedIn OAuth cancelled or state mismatch', [
