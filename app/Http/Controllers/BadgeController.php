@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Format;
 use Intervention\Image\ImageManager;
 
 class BadgeController extends Controller
@@ -155,7 +156,7 @@ class BadgeController extends Controller
             $font->align('center');
         });
 
-        Storage::put('badges/'.$user->id.'.png', (string) $image->encodeUsingFormat('png'));
+        Storage::put('badges/'.$user->id.'.png', (string) $image->encodeUsingFormat(Format::Png));
     }
 
     private function shareToLinkedIn(object $user, string $badgePath): bool
